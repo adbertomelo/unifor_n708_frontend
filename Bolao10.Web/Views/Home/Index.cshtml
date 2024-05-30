@@ -1,0 +1,169 @@
+﻿@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var bolaoIniciado = @ViewBag.BolaoIniciado;
+}
+
+<input id="codigo-participante" type="hidden" value="@(ViewBag.Participante.Codigo)" />
+
+<script src="~/Scripts/Home1.js"></script>
+
+<script type="text/javascript">
+    var userInfo = {
+        Id: @(ViewBag.Participante.Id),
+        Codigo: '@(ViewBag.Participante.Codigo)',
+        Nome: '@(ViewBag.Participante.Usuario.Nome)'
+    };
+    window.userInfo = userInfo;
+</script>
+
+@if (!bolaoIniciado)
+{
+    <div class="row">
+
+        <div class="col-md-3 col-xs-12">
+            <div class="statbox MeusConvites">
+                <div class="number">@ViewBag.MeusConvites</div>
+                <div class="text"><a style="color:white" href="/Convite/Index">Meus Convites</a></div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-xs-12">
+            <div class="statbox Aceito">
+                <div class="number">@ViewBag.MeusConvitesAceitos</div>
+                <div class="text">Aceitos</div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-xs-12">
+            <div class="statbox Pendente">
+                <div class="number">@ViewBag.MeusConvitesPendentes</div>
+                <div class="text">Pendentes</div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-xs-12">
+            <div class="statbox TotalConvites">
+                <div class="number">@ViewBag.TotalConvites</div>
+                @if (@ViewBag.Participante.Tipo == "M")
+                {
+                    <div class="text"><a style="color:white" href="/Convite/All">Convites do Bolão</a></div>
+                }
+                else
+                {
+                    <div class="text">Convites do Bolão</div>
+                }
+            </div>
+        </div>
+
+    </div>
+}
+else
+{
+
+    Html.RenderAction("Indicadores2");
+}
+
+<div class="row">
+
+    <div class="col-md-12">
+
+        <div style="padding-top:20px;"></div>
+
+        <div class="panel panel-info">
+            <div class="panel-heading">Mensagens Recentes</div>
+            <div class="panel-body">
+
+                <textarea class="form-control" placeholder="Deixe sua mensagem" data-bind="value: novoComentario, valueUpdate: 'afterkeydown', event: { keypress: commentKeypress }"></textarea>
+
+                <div style="padding-top:10px;"></div>
+
+                <!-- ko foreach: comentarios-->
+                <div data-bind="attr: {threadConversationMessageId: id}">
+                    <div>
+
+                        <strong class="text-success" data-bind="text: participante().Usuario.Nome"></strong>
+
+                        <span data-bind="text: texto"></span>
+
+                        <div class="small">
+                            <small>
+                                <span class="glyphicon glyphicon-time"></span>
+                                <span data-bind="text: tempoDecorrido"></span>
+                                <span data-bind="ifnot: $parent.isSignalREnabled">
+                                    <img src="@Url.Content("Content/images/loading_small.gif")" />
+                                </span>
+
+                                <span>
+                                    <a href="javascript:void(0);" data-bind="style: { display: curtidoPorEsteUsuario() ? 'none' : ''}, click: curtir">Curtir</a>
+                                    <a href="javascript:void(0);" data-bind="style: { display: curtidoPorEsteUsuario() ? '' : 'none'}, click: descurtir">Curtir (Desfazer)</a>
+                                </span>
+                                
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="balloonEdge"></div>
+
+                    <div class="boxExternoLike">
+                        <div class="boxInternoLike">
+                            <!-- ko if: curtiram().length > 0 -->
+                            <div class="likeInfo" data-bind="text: sumarioDeCurtidas, style: {display: sumarioDeCurtidas().trim().length > 0 ? '' : 'none'}">
+                            </div>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+
+                    <div>
+                        <!-- ko foreach: comentarios -->
+                        <div class="comentarios">
+                            <div data-bind="attr: {answerId: id}">
+                                <strong class="text-success" data-bind="text: participante().Usuario.Nome"></strong>
+                                <span data-bind="text: texto"></span>
+                                <div class="small">
+                                    <small>
+                                        <span class="glyphicon glyphicon-time"></span>
+                                        <span data-bind="text: tempoDecorrido"></span>
+                                        <span>
+                                            <a href="javascript:void(0);" class="post-info-link" data-bind="style: { display: curtidoPorEsteUsuario() ? 'none' : ''}, click: curtir">Curtir</a>
+                                            <a href="javascript:void(0);" class="post-info-link" data-bind="style: { display: curtidoPorEsteUsuario() ? '' : 'none'}, click: descurtir">Curtir (Desfazer)</a>
+                                        </span>
+                                    </small>
+                                </div>
+                                <div class="boxExternoLike">
+                                    <div class="boxInternoLike">
+
+                                        <div class="likeInfo" data-bind="text: sumarioDeCurtidas, style: {display: sumarioDeCurtidas().trim().length > 0 ? '' : 'none'}">
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div style="padding-top:2px;"></div>
+                        <!-- /ko -->
+                    </div>
+
+
+                    <div class="comentarios">
+                        <div class="novocomentario">
+                            <textarea class="form-control input-sm" placeholder="Digite um comentário aqui..." data-bind="value: novoComentario, valueUpdate: 'afterkeydown', event: { keypress: commentKeypress }"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /ko -->
+
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>
+
+
+

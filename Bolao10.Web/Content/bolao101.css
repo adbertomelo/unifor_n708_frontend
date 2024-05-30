@@ -1,0 +1,436 @@
+﻿body {
+    padding-top: 70px;
+}
+
+.user-active {
+    color: red;
+    font-weight: bold;
+}
+
+.text-online {
+    color: green;
+}
+
+.text-offline {
+    color: grey;
+}
+
+.placar {
+    width: 29px;
+    border: 1px solid rgba(181, 176, 176, 0.98);
+}
+
+.table-ranking-detalhe {
+}
+
+.amarelo {
+    color: #ffd800;
+}
+
+.box-pagamento {
+    padding-left: 15px;
+    padding-top: 15px;
+}
+
+.caixa-notificacoes {
+    width: 150px;
+}
+
+.obs_apostas {
+    color: #ff0000;
+    font-size: small;
+    font-weight: 100;
+}
+
+.cinza {
+    color: #726f6f;
+}
+
+.destacado {
+    color: #000000;
+}
+
+.table-ranking-detalhe tbody > tr > td {
+    padding-bottom: 8px;
+    padding-top: 8px;
+    padding-left: 2px;
+    padding-right: 2px;
+    line-height: 1.428571429;
+    vertical-align: top;
+    border-top: 1px solid #dddddd;
+}
+
+.div-gols1 {
+    text-align: center;
+    padding: 0px 5px 0px 7px;
+    border: solid thin;
+    border-color: rgb(194, 194, 194);
+}
+
+.div-gols2 {
+    text-align: center;
+    padding: 0px 7px 0px 5px;
+    border: solid thin;
+    border-color: rgb(194, 194, 194);
+}
+
+.badge-online {
+    position: absolute;
+    top: 6px;
+    right: -4px;
+    background-color: green;
+}
+
+.badge-warning {
+    position: absolute;
+    top: 6px;
+    right: -4px;
+    background-color: red;
+}
+
+.vermelho {
+    color: red;
+}
+
+.branco {
+    color: white;
+}
+
+.PosicaoAtual {
+    background-color: #094AB2;
+}
+
+.NumPontos {
+    background-color: #ffb900;
+}
+
+.PlacaresHoje, .ProximosPlacares {
+    background-color: #669;
+}
+
+.MelhorPosicaoDia {
+    background-color: #0CC;
+}
+
+.PosicaoTempoReal {
+    background-color: #9A59B5;
+}
+
+.PosicaoAnterior {
+    background-color: #504F63;
+}
+
+.PontosDasPrimeirasPosicoes {
+    background-color: #10A6DE;
+}
+
+.statbox {
+    margin-bottom: 15px;
+    padding: 20px;
+    height: 120px;
+    color: white;
+    /*border-radius:3px;*/
+    /*-webkit-border-radius:3px;*/
+}
+
+    .statbox .corpo {
+        height: 75%;
+    }
+
+    .statbox .legenda {
+        height: 25%;
+        font-size: large;
+    }
+
+    .statbox .number {
+        font-size: 40px;
+    }
+
+    .statbox .number-min {
+        font-size: 15px;
+        font-weight: 100;
+    }
+
+    .statbox .text {
+        font-size: large;
+    }
+
+.balloonEdge {
+    background-image: url('../content/images/balloonEdge.png');
+    background-repeat: no-repeat;
+    height: 10px;
+    padding: 0 0 0 12px;
+    margin: 0 0 0 12px;
+    margin-left: 1%;
+}
+
+.likeInfo {
+    font-weight: bold;
+    font-size: 0.8em;
+}
+
+.like-icon {
+    padding-left: 10px;
+}
+
+.boxExternoLike {
+    margin-bottom: 1px;
+    margin-top: 1px;
+}
+
+.boxInternoLike {
+    margin-left: 1%;
+    background-color: #EDEFF4;
+}
+
+.comentarios {
+    margin-left: 1%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #EDEFF4;
+}
+
+    .comentarios .novocomentario {
+        padding-left: 1%;
+        padding-right: 1%;
+    }
+
+.page-header {
+    padding-bottom: 3px;
+    margin: 0px 0 20px 0px;
+    border-bottom: 1px solid #eee;
+    color: #504F63;
+    text-shadow: 0 1px rgba(255, 255, 255, 0.5);
+    font-size: 22px;
+    line-height: 26px;
+}
+
+.Status {
+    padding: 2px 5px;
+    color: #FFF;
+    font-size: 100%;
+}
+
+.MeusConvites {
+    background-color: #094AB2;
+}
+
+.Pendente, .Cadastrado, .Iniciado {
+    background-color: #FFC545;
+}
+
+.Aceito, .Liberado, .Aprovado {
+    background-color: #43C83C;
+}
+
+.Cancelado, .Bloqueado, .NaoIniciado {
+    background-color: rgb(128, 128, 128);
+}
+
+.TotalConvites {
+    background-color: #504F63;
+}
+
+.nome-time {
+    margin-right: 4px;
+}
+
+
+
+/*
+.bra, .arg, .bol, .chi, .col, 
+.equ, .jap, .par, .per, .qat, 
+.uru, .ven
+{ display: inline-block; background: url('../content/images/copa_america_2019.png') no-repeat; overflow: hidden; text-indent: -9999px; text-align: left; }
+ 
+.bra { background-position: -0px -0px; width: 22px; height: 15px; }
+.arg { background-position: -0px -15px; width: 20px; height: 13px; }
+.bol { background-position: -0px -28px; width: 20px; height: 14px; }
+.chi { background-position: -0px -42px; width: 20px; height: 13px; }
+.col { background-position: -0px -55px; width: 20px; height: 13px; }
+.equ { background-position: -0px -68px; width: 20px; height: 13px; }
+.jap { background-position: -0px -81px; width: 20px; height: 13px; }
+.par { background-position: -0px -94px; width: 20px; height: 11px; }
+.per { background-position: -0px -105px; width: 20px; height: 13px; }
+.qat { background-position: -0px -118px; width: 20px; height: 8px; }
+.uru { background-position: -0px -126px; width: 20px; height: 13px; }
+.ven { background-position: -0px -139px; width: 20px; height: 13px; }
+
+*/
+
+.sen,
+.qat,
+.nld,
+.ecu,
+.eng,
+.usa,
+.gal,
+.irn,
+.arg,
+.mex,
+.pol,
+.sau,
+.dnk,
+.fra,
+.tun,
+.aus,
+.deu,
+.esp,
+.jpn,
+.cri,
+.mar,
+.bel,
+.cro,
+.can,
+.sui,
+.bra,
+.cmr,
+.srb,
+.ury,
+.prt,
+.kor,
+.gha {
+    background: url('../content/images/copa_2022.png') no-repeat top left;
+    width: 26px;
+    height: 17px;
+}
+
+.arg {
+    background-position: 0 0;
+}
+
+.aus {
+    background-position: -36px 0;
+}
+
+.bel {
+    background-position: -72px 0;
+}
+
+.bra {
+    background-position: -108px 0;
+}
+
+.can {
+    background-position: -144px 0;
+}
+
+.cmr {
+    background-position: -180px 0;
+}
+
+.cri {
+    background-position: -216px 0;
+}
+
+.cro {
+    background-position: -252px 0;
+}
+
+.deu {
+    background-position: -288px 0;
+}
+
+.dnk {
+    background-position: -324px 0;
+}
+
+.ecu {
+    background-position: -360px 0;
+}
+
+.eng {
+    background-position: -396px 0;
+}
+
+.esp {
+    background-position: -432px 0;
+}
+
+.fra {
+    background-position: -468px 0;
+}
+
+.gal {
+    background-position: -504px 0;
+}
+
+.gha {
+    background-position: -540px 0;
+}
+
+.irn {
+    background-position: -576px 0;
+}
+
+.jpn {
+    background-position: -612px 0;
+}
+
+.kor {
+    background-position: -648px 0;
+}
+
+.mar {
+    background-position: -684px 0;
+}
+
+.mex {
+    background-position: -720px 0;
+}
+
+.nld {
+    background-position: -756px 0;
+}
+
+.pol {
+    background-position: -792px 0;
+}
+
+.prt {
+    background-position: -828px 0;
+}
+
+.qat {
+    background-position: -864px 0;
+}
+
+.sau {
+    background-position: -900px 0;
+}
+
+.sen {
+    background-position: -936px 0;
+}
+
+.srb {
+    background-position: -972px 0;
+}
+
+.sui {
+    background-position: -1008px 0;
+}
+
+.tun {
+    background-position: -1044px 0;
+}
+
+.ury {
+    background-position: -1080px 0;
+}
+
+.usa {
+    background-position: -1116px 0;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}

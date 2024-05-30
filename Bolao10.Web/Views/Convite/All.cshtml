@@ -1,0 +1,142 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var total = ViewBag.Convites.Count;
+    var label = @total == 0 || @total > 1 ? "Convites" : "Convite";
+}
+
+<script src="~/Scripts/footable.js"></script>
+<link href="~/Content/footable.core.css" rel="stylesheet" />
+
+<div id="results">
+
+</div>
+
+<div class="row">
+
+    <div class="col-md-12">
+
+       <div class="page-header">@total @label</div>
+
+    </div>
+
+</div>
+
+@if(!@ViewBag.PrazoEncerrado)
+{
+<div class="row">
+
+    <div class="col-md-2">
+        @Html.ActionLink("Convide um amigo", "New")
+    </div>
+    <div class="col-md-3">
+        
+    </div>
+    <div class="col-md-7"></div>
+</div>
+    
+}
+
+<div class="row">
+
+
+    <div class="col-md-12">
+        
+        <table id="tableConvites" class="table table-condensed">
+
+            <thead>
+                <tr>
+                    <th data-hide="phone">
+                        Convidador
+                    </th>
+                    <th data-toggle="true">
+                        Nome
+                    </th>
+                    <th data-hide="phone">
+                        E-mail
+                    </th>
+                    <th data-hide="phone" style="display: table-cell;">
+                        Data
+                    </th>
+                    <th>
+                        Sit. do Convite
+                    </th>
+                    <th data-hide="phone">
+                        Sit. no Bolão
+                    </th>
+                    <th data-hide="phone">
+                        Sit. do Pgto.
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var c in ViewBag.Convites)
+                {
+
+                    var situacaoConvite = @c.SituacaoConvite;
+                    var situacaoBolao = @c.SituacaoBolao;
+                    var situacaoPagamento = @c.SituacaoPagamento;
+
+                    if (situacaoPagamento == "Não iniciado")                     
+                        situacaoPagamento = "NaoIniciado";
+                    
+                    if(situacaoPagamento == "Não identificado")
+                        situacaoPagamento = "NaoIdentificado";
+
+                    <tr>
+                        <td>
+                            @c.Participante.Usuario.Nome
+                        </td>
+                        <td>
+                            @c.NomeConvidado
+                        </td>
+                        <td>
+                            @c.EmailConvidado
+                        </td>
+                        <td>
+                            @c.DataConvite.ToString("d")
+                        </td>
+                        <td>
+                            
+                            <span class="label Status @(situacaoConvite)">
+
+                                @c.SituacaoConvite
+
+                                @if (@c.SituacaoConvite == "Pendente")
+                                {
+                                    if (@c.NumDias > 1)
+                                    {
+                                        <span>(@(c.NumDias)dd)</span>
+                                    }
+                                    else
+                                    {
+                                        <span>(@(c.NumDias)d)</span>
+                                    }
+
+                                }
+
+                            </span>
+                                                        
+                        </td>
+                        <td>
+                            <span class="label Status @(situacaoBolao)">@c.SituacaoBolao</span>
+                        </td>
+                        <td>
+                            <span class="label Status @(situacaoPagamento)">@c.SituacaoPagamento</span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(function(){
+        $('#tableConvites').footable();
+    });
+
+</script>

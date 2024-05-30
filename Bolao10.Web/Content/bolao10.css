@@ -1,0 +1,691 @@
+﻿body {
+    padding-top: 70px;
+}
+
+.user-active {
+    color: red;
+    font-weight: bold;
+}
+
+.text-online {
+    color: green;
+}
+
+.text-offline {
+    color: grey;
+}
+
+.placar {
+    width: 29px;
+    border: 1px solid rgba(181, 176, 176, 0.98);
+}
+
+.table-ranking-detalhe {
+}
+
+.amarelo {
+    color: #ffd800;
+}
+
+.cinza {
+    color: #726f6f;
+}
+
+.destacado {
+    color: #000000;
+}
+
+.table-ranking-detalhe tbody > tr > td {
+    padding-bottom: 8px;
+    padding-top: 8px;
+    padding-left: 2px;
+    padding-right: 2px;
+    line-height: 1.428571429;
+    vertical-align: top;
+    border-top: 1px solid #dddddd;
+}
+
+.div-gols1 {
+    text-align: center;
+    padding: 0px 5px 0px 7px;
+    border: solid thin;
+    border-color: rgb(194, 194, 194);
+}
+
+.div-gols2 {
+    text-align: center;
+    padding: 0px 7px 0px 5px;
+    border: solid thin;
+    border-color: rgb(194, 194, 194);
+}
+
+.badge-online {
+    position: absolute;
+    top: 6px;
+    right: -4px;
+    background-color: green;
+}
+
+.badge-warning {
+    position: absolute;
+    top: 6px;
+    right: -4px;
+    background-color: red;
+}
+
+.vermelho {
+    color: red;
+}
+
+.branco {
+    color: white;
+}
+
+.PosicaoAtual {
+    background-color: #094AB2;
+}
+
+.NumPontos {
+    background-color: #ffb900;
+}
+
+.PlacaresHoje, .ProximosPlacares {
+    background-color: #669;
+}
+
+.MelhorPosicaoDia {
+    background-color: #0CC;
+}
+
+.PosicaoTempoReal {
+    background-color: #9A59B5;
+}
+
+.PosicaoAnterior {
+    background-color: #504F63;
+}
+
+.PontosDasPrimeirasPosicoes {
+    background-color: #10A6DE;
+}
+
+.statbox {
+    margin-bottom: 15px;
+    padding: 20px;
+    height: 120px;
+    color: white;
+    /*border-radius:3px;*/
+    /*-webkit-border-radius:3px;*/
+}
+
+    .statbox .corpo {
+        height: 75%;
+    }
+
+    .statbox .legenda {
+        height: 25%;
+        font-size: large;
+    }
+
+    .statbox .number {
+        font-size: 40px;
+    }
+
+    .statbox .number-min {
+        font-size: 15px;
+        font-weight: 100;
+    }
+
+    .statbox .text {
+        font-size: large;
+    }
+
+.balloonEdge {
+    background-image: url('../content/images/balloonEdge.png');
+    background-repeat: no-repeat;
+    height: 10px;
+    padding: 0 0 0 12px;
+    margin: 0 0 0 12px;
+    margin-left: 1%;
+}
+
+.likeInfo {
+    font-weight: bold;
+    font-size: 0.8em;
+}
+
+.like-icon {
+    padding-left: 10px;
+}
+
+.boxExternoLike {
+    margin-bottom: 1px;
+    margin-top: 1px;
+}
+
+.boxInternoLike {
+    margin-left: 1%;
+    background-color: #EDEFF4;
+}
+
+.comentarios {
+    margin-left: 1%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #EDEFF4;
+}
+
+    .comentarios .novocomentario {
+        padding-left: 1%;
+        padding-right: 1%;
+    }
+
+.page-header {
+    padding-bottom: 3px;
+    margin: 0px 0 20px;
+    border-bottom: 1px solid #eee;
+    color: #504F63;
+    text-shadow: 0 1px rgba(255, 255, 255, 0.5);
+    font-size: 22px;
+    line-height: 26px;
+}
+
+.Status {
+    padding: 2px 5px;
+    color: #FFF;
+    font-size: 100%;
+}
+
+.MeusConvites {
+    background-color: #094AB2;
+}
+
+.Pendente, .Cadastrado, .Iniciado {
+    background-color: #FFC545;
+}
+
+.Aceito, .Liberado, .Aprovado {
+    background-color: #43C83C;
+}
+
+.Cancelado, .Bloqueado, .NaoIniciado {
+    background-color: rgb(128, 128, 128);
+}
+
+.TotalConvites {
+    background-color: #504F63;
+}
+
+.nome-time {
+    margin-right: 4px;
+}
+
+/*    
+.Argentina, .Australia, .Belgium, .Bosnia, .Brazil, .camaroes, .Chile, .Colombia, .costa-do-marfim, .Costa-Rica, .croacia, .Equador, .Espanha, .Estados-Unidos, .Franca, .gana, .Grecia, .Holanda, .Honduras, .Inglaterra, .Iran, .Italia, .Japan, .Mexico, .nigeria, .Portugal, .Russian, .South-Korea, .suica, .Uruguai, .Alemanha, .argelia{
+	background: url(../content/images/bandeiras.png) no-repeat;
+    margin-left:4px;
+    margin-right:1px;
+}
+
+.Argentina{
+	background-position: 0 -220px ;
+	width: 21px;
+	height: 15px;
+}
+
+.Australia{
+	background-position: 0 -203px ;
+	width: 21px;
+	height: 15px;
+}
+
+.Belgium{
+	background-position: 0 -186px ;
+	width: 21px;
+	height: 15px;
+}
+
+.Bosnia{
+	background-position: 0 -169px ;
+	width: 21px;
+	height: 15px;
+}
+
+.Brazil{
+	background-position: 0 -152px ;
+	width: 21px;
+	height: 15px;
+}
+
+.camaroes{
+	background-position: 0 -135px ;
+	width: 21px;
+	height: 15px;
+}
+
+.Chile{
+	background-position: 0 -119px ;
+	width: 21px;
+	height: 15px;
+}
+
+.Colombia{
+	background-position: 0 -103px ;
+	width: 21px;
+	height: 15px;
+}
+
+.costa-do-marfim{
+	background-position: 0 -86px ;
+	width: 21px;
+	height: 15px;
+}
+
+.Costa-Rica{
+	background-position: 0 -69px ;
+	width: 21px;
+	height: 15px;
+}
+
+.croacia{
+	background-position: 0 -51px ;
+	width: 21px;
+	height: 15px;
+}
+
+.Equador{
+	background-position: 0 -33px ;
+	width: 21px;
+	height: 15px;
+}
+
+.Espanha{
+	background-position: 0 -16px ;
+	width: 21px;
+	height: 15px;
+}
+
+.Estados-Unidos{
+	background-position: -69px -465px ;
+	width: 21px;
+	height: 15px;
+}
+
+.Franca{
+	background-position: -46px -465px ;
+	width: 21px;
+	height: 15px;
+}
+
+.gana{
+	background-position: -23px -465px ;
+	width: 21px;
+	height: 15px;
+}
+
+.Grecia{
+	background-position: 0 -465px ;
+	width: 21px;
+	height: 15px;
+}
+
+.Holanda{
+	background-position: 0 -447px ;
+	width: 21px;
+	height: 15px;
+}
+
+.Honduras{
+	background-position: 0 -430px ;
+	width: 21px;
+	height: 15px;
+}
+
+.Inglaterra{
+	background-position: 0 -413px ;
+	width: 21px;
+	height: 15px;
+}
+
+.Iran{
+	background-position: 0 -396px ;
+	width: 21px;
+	height: 15px;
+}
+
+.Italia{
+	background-position: 0 -380px ;
+	width: 21px;
+	height: 15px;
+}
+
+.Japan{
+	background-position: 0 -364px ;
+	width: 21px;
+	height: 15px;
+}
+
+.Mexico{
+	background-position: 0 -348px ;
+	width: 21px;
+	height: 15px;
+}
+
+.nigeria{
+	background-position: 0 -332px ;
+	width: 21px;
+	height: 15px;
+}
+
+.Portugal{
+	background-position: 0 -316px ;
+	width: 21px;
+	height: 15px;
+}
+
+.Russian{
+	background-position: 0 -299px ;
+	width: 21px;
+	height: 15px;
+}
+
+.South-Korea{
+	background-position: 0 -267px ;
+	width: 21px;
+	height: 15px;
+}
+
+.suica{
+	background-position: 0 -251px ;
+	width: 21px;
+	height: 15px;
+}
+
+.Uruguai{
+	background-position: 0 -283px ;
+	width: 21px;
+	height: 15px;
+}
+
+.Alemanha{
+	background-position: 0 -236px ;
+	width: 21px;
+	height: 15px;
+}
+
+.argelia{
+	background-position: 0 0;
+	width: 21px;
+	height: 15px;
+}
+*/
+
+.Espanha, .Estados-Unidos, .Franca, .gana, .Grecia, .Holanda, .Honduras, .Inglaterra, .Iran, .Irlanda-do-norte, .Italia, .Japan, .Luxemburgo, .Marrocos, .Mexico, .nigeria, .Pais-de-gales, .Panama, .Peru, .Portugal, .Romenia, .Russian, .Servia, .South-Korea, .suica, .Trindade-e-tobago, .Uruguai, .Alemanha, .argelia, .Argentina, .Armenia, .Australia, .Belgium, .Bosnia, .Brazil, .camaroes, .Chile, .Colombia, .costa-do-marfim, .Costa-Rica, .croacia, .El-salvador, .Equador, .Eslovenia {
+    background: url(../content/images/amistosos.png) no-repeat;
+    margin-left: 4px;
+    margin-right: 1px;
+}
+
+.Espanha {
+    background-position: -233px -182px;
+    width: 21px;
+    height: 15px;
+}
+
+.Estados-Unidos {
+    background-position: -202px -342px;
+    width: 21px;
+    height: 15px;
+}
+
+.Franca {
+    background-position: -206px -320px;
+    width: 21px;
+    height: 15px;
+}
+
+.gana {
+    background-position: -199px -297px;
+    width: 21px;
+    height: 15px;
+}
+
+.Grecia {
+    background-position: -196px -275px;
+    width: 21px;
+    height: 15px;
+}
+
+.Holanda {
+    background-position: -194px -255px;
+    width: 21px;
+    height: 15px;
+}
+
+.Honduras {
+    background-position: -200px -228px;
+    width: 21px;
+    height: 15px;
+}
+
+.Inglaterra {
+    background-position: -197px -202px;
+    width: 21px;
+    height: 15px;
+}
+
+.Iran {
+    background-position: -201px -180px;
+    width: 21px;
+    height: 15px;
+}
+
+.Irlanda-do-norte {
+    background-position: -147px -355px;
+    width: 21px;
+    height: 15px;
+}
+
+.Italia {
+    background-position: -154px -330px;
+    width: 21px;
+    height: 15px;
+}
+
+.Japan {
+    background-position: -165px -307px;
+    width: 21px;
+    height: 15px;
+}
+
+.Luxemburgo {
+    background-position: -160px -281px;
+    width: 21px;
+    height: 15px;
+}
+
+.Marrocos {
+    background-position: -155px -258px;
+    width: 21px;
+    height: 15px;
+}
+
+.Mexico {
+    background-position: -160px -228px;
+    width: 21px;
+    height: 15px;
+}
+
+.nigeria {
+    background-position: -157px -201px;
+    width: 21px;
+    height: 15px;
+}
+
+.Pais-de-gales {
+    background-position: -161px -176px;
+    width: 21px;
+    height: 15px;
+}
+
+.Panama {
+    background-position: -118px -348px;
+    width: 21px;
+    height: 15px;
+}
+
+.Peru {
+    background-position: -118px -319px;
+    width: 21px;
+    height: 15px;
+}
+
+.Portugal {
+    background-position: -120px -295px;
+    width: 21px;
+    height: 15px;
+}
+
+.Romenia {
+    background-position: -124px -274px;
+    width: 21px;
+    height: 15px;
+}
+
+.Russian {
+    background-position: -123px -248px;
+    width: 21px;
+    height: 15px;
+}
+
+.Servia {
+    background-position: -126px -223px;
+    width: 21px;
+    height: 15px;
+}
+
+.South-Korea {
+    background-position: -119px -195px;
+    width: 21px;
+    height: 15px;
+}
+
+.suica {
+    background-position: -123px -174px;
+    width: 21px;
+    height: 15px;
+}
+
+.Trindade-e-tobago {
+    background-position: -82px -350px;
+    width: 21px;
+    height: 15px;
+}
+
+.Uruguai {
+    background-position: -84px -324px;
+    width: 21px;
+    height: 15px;
+}
+
+.Alemanha {
+    background-position: -88px -303px;
+    width: 21px;
+    height: 15px;
+}
+
+.argelia {
+    background-position: -90px -278px;
+    width: 21px;
+    height: 15px;
+}
+
+.Argentina {
+    background-position: -88px -257px;
+    width: 21px;
+    height: 15px;
+}
+
+.Armenia {
+    background-position: -97px -237px;
+    width: 21px;
+    height: 15px;
+}
+
+.Australia {
+    background-position: -93px -216px;
+    width: 21px;
+    height: 15px;
+}
+
+.Belgium {
+    background-position: -92px -193px;
+    width: 21px;
+    height: 15px;
+}
+
+.Bosnia {
+    background-position: -94px -171px;
+    width: 21px;
+    height: 15px;
+}
+
+.Brazil {
+    background-position: -55px -347px;
+    width: 21px;
+    height: 15px;
+}
+
+.camaroes {
+    background-position: -54px -322px;
+    width: 21px;
+    height: 15px;
+}
+
+.Chile {
+    background-position: -52px -303px;
+    width: 21px;
+    height: 15px;
+}
+
+.Colombia {
+    background-position: -54px -287px;
+    width: 21px;
+    height: 15px;
+}
+
+.costa-do-marfim {
+    background-position: -57px -266px;
+    width: 21px;
+    height: 15px;
+}
+
+.Costa-Rica {
+    background-position: -59px -243px;
+    width: 21px;
+    height: 15px;
+}
+
+.croacia {
+    background-position: -63px -224px;
+    width: 21px;
+    height: 15px;
+}
+
+.El-salvador {
+    background-position: -66px -203px;
+    width: 21px;
+    height: 15px;
+}
+
+.Equador {
+    background-position: -67px -188px;
+    width: 21px;
+    height: 15px;
+}
+
+.Eslovenia {
+    background-position: -66px -168px;
+    width: 21px;
+    height: 15px;
+}

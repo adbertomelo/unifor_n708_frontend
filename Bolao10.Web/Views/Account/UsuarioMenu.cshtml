@@ -1,0 +1,32 @@
+﻿@model Bolao10.Model.Entities.Participante
+
+
+
+<li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <small>
+            @Model.Usuario.Nome
+        </small>
+        <b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+        <li>
+            @Html.ActionLink("Conta", "OpcoesConta", "Account")
+        </li>
+        <li>@Html.ActionLink("Meus Convites", "Index", "Convite")</li>
+        @{
+            if (@Model.Tipo == "M")
+            {
+                <li>
+                    @Html.ActionLink("Lançar Placar", "LancarPlacar", "Admin")
+                </li>
+                <!--li>
+                    @Html.ActionLink("Liberar", "ListarParticipantesPendentesPagamento", "Admin")
+                </li-->
+            }
+        }
+        <li>
+            @Html.ActionLink("Sair", "Logout", "Account")
+        </li>
+    </ul>
+</li>

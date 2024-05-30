@@ -1,0 +1,40 @@
+﻿@ViewBag.NroNotificacoes
+
+<ul class="nav navbar-nav">
+
+    <li id="li-notificacoes" class="dropdown dropdown-notifications">
+
+        <a href="#notifations-panel" class="dropdown-toggle" data-toggle="dropdown">
+            <i id="total-notificacoes" data-count="@ViewBag.TotalNotificacoes" class="glyphicon glyphicon-bell notification-icon"></i>
+        </a>
+
+        <div class="dropdown-container">
+
+            <ul class="dropdown-menu">
+                @{
+                    if (@ViewBag.TotalNotificacoes == 0)
+                    {
+                        <li>Nenhuma nova mensagem</li>
+                    }
+                    else
+                    {
+                        foreach (var notificacao in ViewBag.Notificacoes)
+                        {
+                            <li class="list-group-item">
+                                @notificacao.Mensagem
+                            </li>
+                        }
+                    }
+                }
+
+            </ul>
+
+            <div class="dropdown-footer text-center">
+                <a href="/home/notificacoes">Ver todas</a>
+            </div>
+
+        </div>
+    </li>
+
+</ul>
+

@@ -1,0 +1,139 @@
+﻿
+@{
+    ViewBag.Title = "Ranking";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">Ranking</div>
+
+<script src="~/Scripts/Ranking1.js"></script>
+
+<div class="row">
+    <div class="col-md-12">
+        <table id="tableParticipantes" class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Pos</th>
+                    @*<th style="width:1%;">
+                        <a href="#" data-bind="click: Filtrar">
+                            <i class="fa fa-star"></i>
+                        </a>
+                    </th>*@
+                    <th>Nome</th>
+                    <th>Pts</th>
+                    <th class="visible-md visible-lg">3Pts</th>
+                    <th class="visible-md visible-lg">2Pts</th>
+                    <th class="visible-md visible-lg">1Pt</th>
+                    <th class="visible-md visible-lg">0Pt</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <!-- ko foreach: Ranking-->
+                @*<tr data-bind="css:{ active: Rank() <= 3 }, attr:{ id: Codigo}, event: {mouseover: MouseOver, mouseout: MouseOut}, visible: Filtrado">*@
+                <tr data-bind="css:{ active: Rank() <= 3 }, attr:{ id: Codigo}">
+                    <td>
+                        <span data-bind="text: Rank" />
+                    </td>
+
+                    @*<td>
+                        <a href="#" data-bind="click: Marcar">
+                            <i data-bind="css: Star, visible: Visivel, event: {mouseover: Destacar, mouseout: DesfazDestacacao}"></i>
+                        </a>
+                    </td>*@
+
+                    <td>
+                        <span data-bind="text: Nome, css:{'user-active': Ativo() == true}" />
+                    </td>
+                    <td>
+                        <span data-bind="text: Pontos" />
+                    </td>
+                    <td class="visible-md visible-lg">
+                        <span data-bind="text: Pts3" />
+                    </td>
+                    <td class="visible-md visible-lg">
+                        <span data-bind="text: Pts2" />
+                    </td>
+                    <td class="visible-md visible-lg">
+                        <span data-bind="text: Pts1" />
+                    </td>
+                    <td class="visible-md visible-lg">
+                        <span data-bind="text: Pts0" />
+                    </td>
+                    <td style="text-align:right">
+
+                        <a href="#" data-bind="attr: { title: Expandido() ? 'Ocultar jogos' : 'Exibir jogos' }, click: ExibirJogos" title="Exibir Jogos">
+                            <img data-bind="attr: { src: Expandido() == 1 ? '/content/images/up.png' : Expandido() == 2 ? '/content/images/loader.gif' : '/content/images/down.png'}" src="~/content/images/down.png">
+                        </a>
+
+                    </td>
+                </tr>
+
+                <!-- ko if: TemApostas -->
+                <tr>
+                    <td colspan="9">
+                        <div style="padding-left: 5px; padding-top: 15px;">
+
+
+
+                            <div data-bind="attr:{id: IdDivChart}"></div>
+
+                            <table class="table-ranking-detalhe" data-bind="visible: NoChart">
+                                <thead>
+                                    <tr>
+                                        <th colspan="5">Jogo</th>
+                                        <th style="text-align:center">Palpite</th>
+                                        <th style="text-align:center">Pts</th>
+                                        <th style="text-align:right">Pos</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- ko foreach: Apostas -->
+                                    <tr>
+                                        <td>
+                                            <div data-bind="attr: {class: Jogo().Time1.Figura}"></div>
+                                        </td>
+                                        <td>
+                                            <span data-bind="text: Jogo().Time1.Sigla" class="visible-xs pull-left"></span>
+                                            <span data-bind="text: Jogo().Time1.Nome" class="visible-md visible-lg pull-left"></span>
+                                        </td>
+                                        <td>
+                                            <span data-bind="text: Placar"></span>
+                                        </td>
+                                        <td>
+                                            <div data-bind="attr: {class: Jogo().Time2.Figura}"></div>
+                                        </td>
+                                        <td>
+                                            <span data-bind="text: Jogo().Time2.Sigla" class="visible-xs pull-left"></span>
+                                            <span data-bind="text: Jogo().Time2.Nome" class="visible-md visible-lg pull-left"></span>
+                                        </td>
+                                        <td><span data-bind="text: Palpite"></span></td>
+                                        <td style="text-align:center"><span data-bind="text: Pontos"></span></td>
+                                        <td style="text-align:right"><span data-bind="text: Posicao"></span></td>
+                                    </tr>
+                                    <!-- /ko-->
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </td>
+                </tr>
+                <!-- /ko-->
+                <!-- /ko -->
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<script type="text/javascript">
+
+    google.load("visualization", "1", { packages: ["corechart"] });
+
+    google.setOnLoadCallback();
+
+</script>

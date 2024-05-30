@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "ProcessamentoOk";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>
+    <span class="glyphicon glyphicon-ok" style="color:green" aria-hidden="true"></span>
+    <span>O processo de pagamento foi realizado com sucesso.</span>    
+</h2>
+
+
+@if (!string.IsNullOrWhiteSpace(ViewBag.PaymentLink))
+{
+    <p>Clique no link abaixo para imprimir seu boleto.</p>
+    <h4>
+        <a href="@ViewBag.PaymentLink" target="_blank">Boleto</a>
+    </h4>
+    
+}

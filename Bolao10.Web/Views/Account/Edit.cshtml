@@ -1,0 +1,92 @@
+﻿@model Bolao10.ViewModels.ParticipanteEditViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div>
+
+    <div class="page-header">Cadastro</div>
+
+    <div class="col-md-12">
+
+        @using (Html.BeginForm("Edit", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationSummary(true)
+
+            @Html.HiddenFor(m => m.Codigo, new { Value = @ViewBag.Codigo })
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Nome, new { @class = "control-label" })
+
+                @Html.TextBoxFor(m => m.Nome, new { @class = "form-control", Value = @ViewBag.Nome })
+                @Html.ValidationMessageFor(m => m.Nome)
+
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Pais, new { @class = "control-label" })
+
+                @Html.DropDownListFor(m => m.Pais, ViewBag.Paises as SelectList, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Nome)
+
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Estado, new { @class = "control-label" })
+
+                @Html.DropDownListFor(m => m.Estado, ViewBag.Estados as SelectList, "--Selecione--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Estado)
+
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Cidade, new { @class = "control-label" })
+
+                @Html.DropDownListFor(m => m.Cidade, ViewBag.Cidades as SelectList, "--Selecione--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Cidade)
+
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Alterar" class="btn btn-success green-btn" />
+            </div>
+
+        }
+
+    </div>
+
+</div>
+
+<script type="text/javascript">
+
+    $(function () {
+        $("#Estado").change(function () {
+
+            $.getJSON('/account/getcidades/?estadoId=' + $("#Estado").val(), function (result) {
+                var ddl = $('#Cidade');
+                ddl.empty();
+                $(result).each(function () {
+                    $(document.createElement('option'))
+                        .attr('value', this.Id)
+                        .text(this.Nome)
+                        .appendTo(ddl);
+                });
+            });
+
+
+        });
+    });
+
+
+</script>
+
+@section Scripts {
+    @System.Web.Optimization.Scripts.Render("~/bundles/jqueryval")
+
+}
+

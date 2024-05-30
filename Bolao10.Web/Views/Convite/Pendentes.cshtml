@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "View1";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">Convites de Outros Bolões</div>
+
+<script src="~/Scripts/Convites.js"></script>
+
+<div class="row">
+
+    <div class="col-md-7">
+        
+        <button id="btnEnviarConvites" class="btn btn-primary pull-right" data-bind="click: enviarConvites">Enviar Convites</button>
+        
+    </div>
+
+</div>
+
+<div style="margin-top:12px">
+
+</div>
+
+<div class="row">
+    <div class="col-md-7">
+
+        <table class="table table-condensed" >
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>
+                        Nome
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Convidador Por
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- ko foreach: Convites-->
+                <tr>
+                    <td>
+                        <input type="checkbox" data-bind="checked: Selecionado, enable:StatusDoEnvio() == 0 || StatusDoEnvio() == 3" />
+                    </td>
+                    <td>
+                        <span data-bind="text: NomeConvidado"></span>
+                    </td>
+                    <td>
+                        <span data-bind="text: EmailConvidado"></span>
+                    </td>
+
+                    <td>
+                        <span data-bind="text: Situacao"></span>
+                    </td>
+                    <td>
+                        <span class="glyphicon glyphicon-ok" style="display:none;" data-bind="visible:StatusDoEnvio()==2"></span>
+                        <span class="glyphicon glyphicon-ban-circle" style="display:none;" data-bind="visible:StatusDoEnvio()==3, text: MensagemDeErro"></span>
+                        <img src="@Url.Content("/Content/images/loading_small.gif")" style="display:none;" data-bind="visible:StatusDoEnvio()==1" />
+                    </td>
+                </tr>
+                <!-- /ko -->
+            </tbody>
+        </table>
+    </div>
+</div>
+

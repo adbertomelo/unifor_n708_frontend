@@ -1,0 +1,44 @@
+﻿
+
+@{
+    ViewBag.Title = "Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">Pagamento</div>
+
+<blockquote>
+    <p>
+        Para finalizar sua inscrição, você precisa efetuar o pagamento.
+        Esse pagamento será realizado através do <strong>PagSeguro</strong>.
+        O PagSeguro é meio de pagamento eletrônico do grupo UOL. É seguro e permite que sejam utilizadas as formas de pagamento
+        boleto bancário, cartão de crédito e transferência eletrônica.
+    </p>
+</blockquote>
+
+
+<form action="https://pagseguro.uol.com.br/v2/checkout/payment.html" method="post">
+
+    @{
+        var valor = ViewBag.Bolao.Valor.ToString("N").Replace(",", ".");
+        var pedido = ViewBag.Pedido;
+        var nome = ViewBag.Participante.Usuario.Nome;
+        var email = ViewBag.Participante.Usuario.Email;
+        
+    }
+    
+
+    <input type="hidden" name="receiverEmail" value="adbertomelo@yahoo.com.br"/>
+    <input type="hidden" name="currency" value="BRL"/>
+    <input type="hidden" name="itemId1" value="1000"/>
+    <input type="hidden" name="itemDescription1" value="Participação no Bolão da Copa do Mundo 2014"/>
+    <input type="hidden" name="itemQuantity1" value="1"/>
+    <input type="hidden" name="itemAmount1" value="@(valor)"/>
+    <input type="hidden" name="reference" value="@(pedido)"/>
+    <input type="hidden" name="senderName" value="@(nome)"/>
+    <input type="hidden" name="senderEmail" value="@(email)"/>
+    <input type="hidden" name="itemShippingCost1" value="0.00"> 
+
+    <input alt="Pague com PagSeguro" name="submit" type="image" src="https://p.simg.uol.com.br/out/pagseguro/i/botoes/pagamentos/120x53-pagar.gif" /> 
+
+</form>

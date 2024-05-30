@@ -1,0 +1,64 @@
+﻿@model  Bolao10.ViewModels.ConviteViewModel
+
+@{
+    ViewBag.Title = "Convites";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+
+    <div class="page-header">Novo Convite</div>
+
+    <div class="col-md-12">
+        
+
+            @using (Html.BeginForm("New", "Convite", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", id="form1" }))
+            {
+
+                
+                @Html.ValidationSummary(true)
+                <div class="form-group">
+                    @Html.Label("Email do Convidado")
+                    <div>
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control"})
+                        @Html.ValidationMessageFor(m => m.Email)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Nome do Convidado")
+                    <div>
+                        @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Nome)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div>
+                        <input id="btnConfirm" type="submit" value="Confirmar" class="btn btn-success green-btn" />
+                    </div>
+                </div>
+
+            }
+
+    </div>
+</div>
+
+@section Scripts {
+    @System.Web.Optimization.Scripts.Render("~/bundles/jqueryval")
+
+}
+
+<script>
+
+    $(document).ready(
+        function()
+        {
+            $("#form1").submit(function () {
+                if ($(this).valid()) {
+                    $("#btnConfirm").val("Aguarde...");
+                    $("#btnConfirm").attr("disabled", "disabled")
+                }
+            });
+        });
+
+
+</script>

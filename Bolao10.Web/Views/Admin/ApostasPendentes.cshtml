@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "View1";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <span data-bind="text: $root.ApostasPendentes().length"></span><span> Apostas Pendentes</span>
+    </div>
+
+<script src="~/Scripts/AdminApostasPendentes.js"></script>
+
+
+<div class="row">
+
+    <div class="col-md-12">
+        
+        <button id="btnEnviarConvites" class="btn btn-primary pull-right" data-bind="click: enviarEmails">Enviar Email</button>
+        
+    </div>
+
+</div>
+
+<div style="margin-top:12px">
+
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <table class="table table-condensed" >
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>
+                        Participante
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Núm Jogos Rodada
+                    </th>
+                    <th>
+                        Apostas Feitas
+                    </th>
+                    <th>
+                        Apostas Pendentes
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- ko foreach: ApostasPendentes-->
+                <tr>
+                    <td>
+                        <input type="checkbox" data-bind="checked: Selecionado, enable:StatusDoEnvio() == 0 || StatusDoEnvio() == 3" />
+                    </td>
+                    <td>
+                        <span data-bind="text: Participante"></span>
+                    </td>
+
+                    <td>
+                        <span data-bind="text: Email"></span>
+                    </td>
+
+                    <td>
+                        <span data-bind="text: NumJogos"></span>
+                    </td>
+
+                    <td>
+                        <span data-bind="text: ApostasFeitas"></span>
+                    </td>
+
+                    <td>
+                        <span data-bind="text: ApostasPendentes"></span>
+                    </td>
+
+                    <td>
+                        <span class="glyphicon glyphicon-ok" style="display:none;" data-bind="visible:StatusDoEnvio()==2"></span>
+                        <span class="glyphicon glyphicon-ban-circle" style="display:none;" data-bind="visible:StatusDoEnvio()==3, text: MensagemDeErro"></span>
+                        <img src="@Url.Content("/Content/images/loader.gif")" style="display:none;" data-bind="visible:StatusDoEnvio()==1" />
+                    </td>
+                </tr>
+                <!-- /ko -->
+            </tbody>
+        </table>
+    </div>
+</div>
+

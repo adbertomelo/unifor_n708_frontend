@@ -1,0 +1,107 @@
+﻿@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Apostas</h2>
+
+
+<ul class="nav nav-tabs" id="myTab">
+    @foreach (var fase in ViewBag.Fases)
+    {
+
+        <li>
+            <a href="#fase@(fase.Id)" data-toggle="tab">@fase.Nome</a>
+        </li>
+
+    }
+
+</ul>
+
+<div class="tab-content">
+    @{
+        var path = "../content/images/copa_confederacoes/";
+    }
+
+    @foreach (var fase in ViewBag.Fases)
+    {
+        <div class="tab-pane" id="fase@(fase.Id)">
+
+            <div class="panel-group" id="accordion@(fase.Id)">
+
+                @foreach (var rodada in ViewBag.faseRepository.FindAllRodadas(@fase.Id))
+                {
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion@(fase.Id)" href="#collapse@(rodada.Id)">
+                                    @rodada.Nome
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse@(rodada.Id)" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <table>
+                                    <tbody>
+
+                                        @foreach (var aposta in ViewBag.rodadaRepository.FindAllApostas(@rodada.Id, ViewBag.participanteId))
+                                        {
+
+                                            var src1 = path + @aposta.Jogo.Time1.Figura;
+                                            var src2 = path + @aposta.Jogo.Time2.Figura;
+                                            var nomeTime1 = @aposta.Jogo.Time1.Nome;
+                                            var nomeTime2 = @aposta.Jogo.Time2.Nome;
+
+
+                                            <tr>
+                                                <td>
+                                                    <input type="hidden" />
+                                                </td>
+                                                <td>
+                                                    <input type="hidden" />
+                                                </td>
+                                                <td>
+                                                    <input type="hidden" />
+                                                </td>
+                                                <td>
+                                                    <img src="@src1" />
+                                                    <span>
+                                                        @nomeTime1
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <input type="text" value="@(aposta.Gols1)" style=" width:29px" />
+                                                </td>
+                                                <td>X</td>
+                                                <td>
+                                                    <input type="text" value="@(aposta.Gols2)" style="width:29px" />
+                                                </td>
+                                                <td>
+                                                    <img src="@src2" />
+                                                    <span>
+                                                        @nomeTime2
+                                                    </span>
+                                                </td>
+                                            </tr>
+
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    $(function () {
+        $('#myTab a:last').tab('show')
+    })
+</script>

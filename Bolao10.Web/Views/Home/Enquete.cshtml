@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "Enquete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    function teste() {
+        document.getElementById("som").play();
+    }
+
+
+</script>
+
+<div class="page-header">Enquete</div>
+
+<div class="row">
+
+
+    <div class="col-md-4">
+
+        @*<audio id="som">
+                <source src="/Content/sounds/DoorBell.mp3" />
+            </audio>
+
+            <a href="#" onclick="javacript:teste()">Teste de som</a>*@
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Seleção</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                    @foreach (var d in ViewBag.Dados)
+                    {
+                        string w = Math.Truncate(d.Perc).ToString() +  "%";
+                        <tr>
+                            <td>
+                                <span>@d.Time</span>
+                            </td>
+                            <td><span>@d.Total</span></td>
+                            <td>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" 
+                                         aria-valuenow="@d.Perc" aria-valuemin="0" 
+                                         aria-valuemax="100" style="color:black; width: @w">@d.Perc<span>%</span></div>
+                                </div>
+                            </td>
+                        </tr>
+
+                    }
+                
+
+
+            </tbody>
+        </table>
+
+    </div>
+    <div class="col-md-8"></div>
+
+</div>

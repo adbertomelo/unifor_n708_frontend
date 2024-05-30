@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "Upload";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Upload</h2>
+
+<form action="salvararquivo" enctype="multipart/form-data">
+    <input type="file" name="arquivo"  id="arquivo" />
+    <input type="submit" value="ok" />
+</form>

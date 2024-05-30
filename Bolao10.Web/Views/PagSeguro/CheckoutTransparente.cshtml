@@ -1,0 +1,180 @@
+﻿
+@{
+    ViewBag.Title = "Tela de Pagamento";
+    Layout = "~/Views/Shared/_Layout.cshtml";    
+}
+
+<script type="text/javascript" src="~/Scripts/jquery.mask.min.js"></script>
+
+@*<script type="text/javascript" src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>*@
+
+<script type="text/javascript" src="~/Scripts/waitingfor.js"></script>
+
+<script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
+
+<script src="~/Scripts/PagSeguro.js"></script>
+
+<div class="row">
+
+    <h3>Escolha a forma de pagamento</h3>
+    <h5>Valor: R$ 80,00</h5>
+
+    <div id="divMensagemErroSessionId" style="display:none">
+        <h2>Erro ao iniciar o processo de pagamento. Atualize a página, por favor.</h2>
+    </div>
+
+    <div class="tipos-de-pagamentos" id="divTiposDePagamento">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active">
+                <a href="#cartao" role="tab" id="cartao-tab" data-toggle="tab" aria-controls="cartao" aria-expanded="true">Cartão de Crédito</a>
+            </li>
+            <li role="presentation" class="">
+                <a href="#boleto" role="tab" id="boleto-tab" data-toggle="tab" aria-controls="boleto" aria-expanded="false">Boleto</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            
+            <div class="tab-pane fade active in" role="tabpanel" id="cartao" aria-labelledby="cartao-tab">
+
+                <div class="box-pagamento">
+
+                    <h3>Dados do cartão</h3>
+
+                    <div class="form-horizontal">
+
+                        <div class="form-group">
+                            <label for="inputNumeroDoCartao" class="col-sm-2 control-label">Número do cartão</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="inputNumeroDoCartao" maxlength="19"
+                                       data-bind="textInput: PagamentoViaCartao.InfoCartao().Numero">
+                            </div>
+                            <div class="col-sm-2">
+                                <img data-bind="attr: { src: PagamentoViaCartao.UrlBrand() }" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputValidade" class="col-sm-2 control-label">Validade(MM/AAAA)</label>
+
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="inputValidade" maxlength="5"
+                                       data-bind="masked: PagamentoViaCartao.InfoCartao().Validade, mask: '99/9999'">
+                            </div>
+
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputNomeDoTitular" class="col-sm-2 control-label">Nome no cartão</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="inputNomeDoTitular" placeholder="Nome impresso no cartão"
+                                       data-bind="textInput: PagamentoViaCartao.InfoCartao().NomeTitular">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputCodigoDeSeguranca" class="col-sm-2 control-label">Código de segurança</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="inputCodigoDeSeguranca"
+                                       data-bind="value: PagamentoViaCartao.InfoCartao().CodigoSeguranca, attr: { maxlength: PagamentoViaCartao.InfoCartao().CVVSize() }">
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3>Dados do dono do cartão</h3>
+
+                    <div class="form-horizontal">
+
+                        <div class="form-group">
+                            <label for="inputCPF" class="col-sm-2 control-label">CPF</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="inputCPF"
+                                       data-bind="masked: PagamentoViaCartao.InfoPagador().CPF, mask: '999.999.999-99'">
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputDataDeNascimento" class="col-sm-2 control-label">Data de nascimento</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="inputDataDeNascimento" placeholder="DD/MM/AAAA"
+                                       data-bind="masked: PagamentoViaCartao.InfoPagador().DataNascimento, mask: '99/99/9999'">
+
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="inputTelefone" class="col-sm-2 control-label">Celular</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="inputTelefone" placeholder="(__) _________"
+                                       data-bind="masked: PagamentoViaCartao.InfoPagador().Telefone, mask: '(99) 999999999'">
+
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <endereco-component params="value: PagamentoViaCartao.InfoPagador()"></endereco-component>
+                        </div>
+
+                    </div>
+
+                    <div>
+                        <div class="col-md-6">
+                            <p></p>
+                            <button id="btnPagarComCartao" class="btn btn-primary pull-right" data-bind="click: PagamentoViaCartao.ProcessarPagamento">Pagar</button>
+                        </div>
+                        <div class="col-md-6"></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="tab-pane fade" role="tabpanel" id="boleto" aria-labelledby="boleto-tab">
+
+                <div class="box-pagamento">
+
+                    <h3>Informações necessárias</h3>
+
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label for="inputCPFBoleto" class="col-sm-2 control-label">CPF</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control col-sm-8" id="inputCPFBoleto"
+                                       data-bind="masked: PagamentoViaCartao.InfoPagador().CPF, mask: '999.999.999-99'">
+                             </div>
+                         </div>
+                        <div class="form-group">
+                            <label for="inputTelefoneBoleto" class="col-sm-2 control-label">Celular</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control col-sm-8" id="inputTelefoneBoleto" placeholder="(__) _________"
+                                       data-bind="masked: PagamentoViaBoleto.InfoPagador().Telefone, mask: '(99) 999999999'">
+                            </div>
+                        </div>
+                        <div>
+                            <endereco-component params="value: PagamentoViaCartao.InfoPagador()"></endereco-component>
+                        </div>
+                    </div>
+
+
+                    <div data-bind="visible: PagamentoViaBoleto.PaymentLink() != ''">
+                        <a data-bind="attr: { href: PagamentoViaBoleto.PaymentLink() }">Link do boleto</a>
+                    </div>
+
+                    <div>
+                        <div class="col-md-6">
+                            <p></p>
+                            <button id="btnPagarComCartao" class="btn btn-primary pull-right" 
+                                    data-bind="click: PagamentoViaBoleto.ProcessarPagamento">Gerar boleto</button>
+                        </div>
+                        <div class="col-md-6"></div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

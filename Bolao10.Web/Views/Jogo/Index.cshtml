@@ -1,0 +1,246 @@
+﻿@{
+    ViewBag.Title = "Jogos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="results">
+
+</div>
+
+<div class="page-header">Jogos</div>
+
+<script src="~/Scripts/Jogos.js"></script>
+
+<div class="row">
+
+    <div class="col-md-6">
+        <div class="pull-left">
+            <a id="anterior" data-bind="visible: Index() > 0" href="#">Anterior</a>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="pull-right">
+            <a id="proximo" data-bind="visible: Index() < (Dias().length - 1)" href="#">Próximo</a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <table>
+                        <tbody>
+
+                            <!-- ko with: Dia -->
+                            <!-- ko foreach: Jogos-->
+                            <tr>
+                                <td>
+                                    <span data-bind="css:{'fa fa-bookmark vermelho' : Selecionado}"></span>
+                                </td>
+                                <td>
+                                    <div data-bind="attr: {class: Time1().Figura}" />
+                                </td>
+                                <td>
+                                    <div class="visible-md visible-lg" data-bind="text: Time1().Nome"></div>
+                                    <div class="visible-xs visible-sm" data-bind="text: Time1().Sigla"></div>
+                                </td>
+                                <td>
+                                    <div data-bind="text: Gols1" class="div-gols1"> </div>
+                                </td>
+                                <td>
+                                    <span>X</span>
+
+                                </td>
+                                <td>
+                                    <div data-bind="text: Gols2" class="div-gols2"> </div>
+                                </td>
+
+                                <td>
+                                    <div data-bind="attr: {class: Time2().Figura}" />
+                                </td>
+                                <td>
+                                    <div class="visible-md visible-lg" data-bind="text: Time2().Nome"></div>
+                                    <div class="visible-xs visible-sm" data-bind="text: Time2().Sigla"></div>
+                                </td>
+                                <td>
+                                    <div style="padding-left:10px;">
+
+                                        <a href="#" data-bind="click: $parent.RequisitarDadosParaAsEstatisticas">
+                                            <span data-bind="css: StatusPesquisa" title="Pesquisar"></span>
+                                        </a>
+
+                                        <!--a href="#" data-bind="click: Salvar">
+                <span class="glyphicon glyphicon-floppy-disk"></span>
+            </a-->
+
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- /ko -->
+                            <!-- /ko -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+
+    <div class="col-md-6">
+        <!-- ko with: Dia().JogoSelecionado -->
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Placar</th>
+                    <th>Pontos</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+                <!-- ko foreach: Apostas  -->
+                <!-- ko if: Selecionado  -->
+                <tr>
+                    <td>
+                        <span data-bind="text: Participante().Usuario.Nome, css:{'user-active': Ativo() == true}"></span>
+                    </td>
+                    <td>
+                        <span data-bind="text: MeusGols1"></span>
+                        <span>X</span>
+                        <span data-bind="text: MeusGols2"></span>
+                    </td>
+                    <td>
+                        <span data-bind="text: Pontos"></span>
+                    </td>
+                </tr>
+                <!-- /ko -->
+                <!-- /ko -->
+            </tbody>
+        </table>
+        <!-- /ko -->
+    </div>
+
+    <div class="col-md-3">
+        <!-- ko with: Dia().JogoSelecionado -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th><i class="fa fa-filter"></i> Placar</th>
+                    <th>Qtd</th>
+                    <th>%</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- ko foreach: ResumoPlacar -->
+                <tr>
+                    <td>
+                        <input type="checkbox" data-bind="value: Nome, checked: $parent.PlacaresSelecionados" />
+                        <span data-bind="text: Nome"></span>
+                    </td>
+                    <td>
+                        <span data-bind="text: Valor"></span>
+                    </td>
+                    <td>
+                        <span data-bind="text: Percent"></span>
+
+                    </td>
+                </tr>
+                <!-- /ko -->
+            </tbody>
+        </table>
+        <!-- /ko -->
+    </div>
+    <div class="col-md-3">
+        <!-- ko with: Dia().JogoSelecionado -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th><i class="fa fa-filter"></i> Pontos</th>
+                    <th>Qtd</th>
+                    <th>%</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- ko foreach: ResumoPontos-->
+                <tr>
+                    <td>
+                        <input type="checkbox" data-bind="value: Nome, checked: $parent.PontosSelecionados" />
+                        <span data-bind="text: Nome"></span>
+                    </td>
+                    <td>
+                        <span data-bind="text: Valor"></span>
+                    </td>
+                    <td>
+                        <span data-bind="text: Percent"></span>
+                    </td>
+                </tr>
+                <!-- /ko -->
+            </tbody>
+        </table>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th><i class="fa fa-filter"></i> Time</th>
+                    <th>Qtd</th>
+                    <th>%</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <!-- ko foreach: ResumoResultado -->
+                <tr>
+                    <td>
+                        <input type="checkbox" data-bind="value: Nome, checked: $parent.ResultadosSelecionados" />
+                        <span data-bind="text: Nome"></span>
+                    </td>
+                    <td>
+                        <span data-bind="text: Valor"></span>
+                    </td>
+                    <td>
+                        <span data-bind="text: Percent"></span>
+                    </td>
+                </tr>
+                <!-- /ko -->
+            </tbody>
+        </table>
+        <!-- /ko -->
+
+    </div>
+
+</div>
+
+
+<script>
+    $('#anterior').click(function (evt) {
+
+        evt.preventDefault();
+
+        diaAnterior();
+    });
+
+    $('#proximo').click(function (evt) {
+
+        evt.preventDefault();
+
+        proximoDia();
+    });
+
+
+    $(function () {
+
+        $("input").click(function () {
+            $(this).select();
+        });
+
+    })
+
+</script>

@@ -1,0 +1,219 @@
+﻿@{
+    ViewBag.Title = "Apostas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="results">
+
+</div>
+
+<div class="page-header">Apostas</div>
+
+<form id="form1">
+
+    @if (@ViewBag.NumRodadasAbertas > 0)
+    {
+        <div class="pull-right">
+            <input id="btnSalvar" type="submit" class="btn btn-success" value="Salvar" />
+        </div>
+    }
+
+    @{
+        var faseCorrente = ViewBag.FaseCorrente;
+        var rodadaCorrente = @ViewBag.RodadaCorrente.Id;
+        var counter = 0;
+    }
+
+    <ul class="nav nav-tabs" id="myTab">
+        @foreach (var fase in ViewBag.Fases)
+        {
+
+            var active = fase.Id == faseCorrente.Id ? "active" : "";
+
+            <li>
+                <a href="#fase@(fase.Id)" data-toggle="tab">@fase.Nome</a>
+            </li>
+
+        }
+
+    </ul>
+
+
+    <div class="tab-content">
+        @{
+            //var path = "../content/images/copa_2014/";
+            IList<Bolao10.Model.Entities.Rodada> rodadas = ViewBag.Rodadas;
+            IList<Bolao10.Model.Entities.Aposta> apostas = ViewBag.Apostas;
+        }
+
+        @foreach (var fase in ViewBag.Fases)
+        {
+            <div class="tab-pane" id="fase@(fase.Id)">
+
+                <div class="panel-group" id="accordion@(fase.Id)">
+
+                    @foreach (var rodada in rodadas.Where(r => r.Fase.Id == fase.Id))
+                    {
+
+                        var disabled = rodada.Aberta == false ? "disabled" : "";
+                        var collapse = rodada.Id == rodadaCorrente ? "collapse in" : "collapse";
+                        var rodadaAberta = rodada.Aberta;
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion@(fase.Id)" href="#collapse@(rodada.Id)">
+                                        @if (rodadaAberta)
+                                        {
+                                            @rodada.Nome<span class="obs_apostas"> (Encerra em @rodada.DataEncerramento.ToString("dd/MM HH:mm"))</span>
+                                        }
+                                        else
+                                        {
+                                            var hoje = DateTime.Today;
+                                            if (@rodada.DataInicial > hoje)
+                                            {
+                                                @rodada.Nome<span class="obs_apostas"> (Inicia em @rodada.DataInicial.ToString("dd/MM HH:mm"))</span>
+                                            }
+                                            else
+                                            {
+                                                @rodada.Nome<span class="obs_apostas"> (Encerrada em @rodada.DataEncerramento.ToString("dd/MM HH:mm"))</span>
+                                            }
+
+                                        }                                        
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapse@(rodada.Id)" class="panel-collapse @collapse">
+                                <div class="panel-body">
+                                    <table>
+                                        <tbody>
+                                            @foreach (var aposta in apostas.Where(a => a.Jogo.Rodada.Id == rodada.Id).OrderBy(x => x.Jogo.Dia))
+                                            {
+
+                                                var src1 =  @aposta.Jogo.Time1.Figura.ToLower();
+                                                var src2 =  @aposta.Jogo.Time2.Figura.ToLower();
+                                                var nomeTime1 = @aposta.Jogo.Time1.Nome;
+                                                var nomeTime2 = @aposta.Jogo.Time2.Nome;
+                                                var siglaTime1 = @aposta.Jogo.Time1.Sigla;
+                                                var siglaTime2 = @aposta.Jogo.Time2.Sigla;
+                                                
+                                                <tr>
+                                                    @if (rodadaAberta)
+                                                    {
+                                                        <td>
+                                                            <input type="hidden" id="apostas_@(counter)_id" name="apostas[@(counter)].Id" value="@(aposta.Id)" />
+                                                        </td>
+                                                        <td>
+                                                            <input type="hidden" id="apostas_@(counter)_Participante_Id" name="apostas[@(counter)].Participante.Id" value="@(aposta.Participante.Id)" />
+                                                        </td>
+                                                        <td>
+                                                            <input type="hidden" id="apostas_@(counter)_Jogo_Id" name="apostas[@(counter)].Jogo.Id" value="@(aposta.Jogo.Id)" />
+                                                        </td>
+                                                        <td>                                                            
+                                                            <div class="@(src1)"></div>
+                                                        </td>
+                                                        <td>
+                                                                @nomeTime1
+                                                        </td>
+                                                        <td>
+                                                            <input type="number" min="0" id="apostas_@(counter)_gols1"
+                                                                   name="apostas[@(counter)].gols1"
+                                                                   value="@(aposta.Gols1)" 
+                                                                   class="text-center placar"
+                                                                   maxlength="2" max="9" @disabled />
+                                                        </td>
+                                                        <td>X</td>
+                                                        <td>
+                                                            <input type="number" min="0" id="apostas_@(counter)_gols2"
+                                                                   name="apostas[@(counter)].gols2"
+                                                                   value="@(aposta.Gols2)" maxlength="2" 
+                                                                   class="text-center placar" max="9" @disabled />
+                                                        </td>
+                                                        <td>
+                                                            <div class="@(src2)"></div>                                                          
+                                                        </td>
+                                                        <td>
+                                                            @nomeTime2      
+                                                        </td>
+                                                        <td>
+                                                            <div class="visible-lg visible-md">
+                                                                @*<a href="http://www.fifa.com/worldfootball/statisticsandrecords/headtohead/team1=@(siglaTime1)/team2=@(siglaTime2)/index.html" target="_blank" class="like-icon" title="Histórico de Confrontos">
+                                                                    <span class="glyphicon glyphicon-share-alt"></span>
+                                                                </a>*@
+                                                            </div>
+                                                        </td>
+
+                                                        counter += 1;
+                                                    }
+                                                    else
+                                                    {
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td>
+                                                            <div class="@(src1)" />
+                                                        </td>
+                                                        <td>
+                                                           @nomeTime1
+                                                        </td>
+                                                        <td>
+                                                            <div class="div-gols1">
+                                                                @(aposta.Gols1)
+                                                            </div>
+
+                                                        </td>
+                                                        <td>X</td>
+                                                        <td>
+                                                            <div class="div-gols2">
+                                                                @(aposta.Gols2)
+                                                            </div>
+                                                        </td>
+
+                                                        <td>
+                                                            <div class="@(src2)" />
+                                                        </td>
+                                                        <td>
+                                                                @nomeTime2
+
+                                                        </td>
+                                                    }
+
+                                                </tr>
+
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+
+                </div>
+            </div>
+        }
+    </div>
+
+
+</form>
+
+<script src="~/Scripts/Apostas.js?id=1"></script>
+
+<script>
+    $(function () {
+
+        $('#myTab a[href=#fase@(faseCorrente.Id)]').tab('show');
+
+
+
+    })
+
+    $(function () {
+
+        $("input").click(function () {
+            $(this).select();
+        });
+
+    })
+</script>    

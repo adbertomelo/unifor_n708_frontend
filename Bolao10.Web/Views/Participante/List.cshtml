@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "Participantes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12">
+
+    @{
+        var texto = @ViewBag.Total == 1 ? "Participante" : "Participantes";
+    }
+    
+    <div class="page-header">@ViewBag.Total @texto</div>
+
+
+    <table id="tableParticipantes" class="table table-condensed">
+
+        <tbody>
+
+            @{var idx = 0;}
+
+            @foreach (var p in ViewBag.Participantes)
+            {
+                { idx += 1; }
+
+                <tr id="@p.Codigo">
+                    <td>
+                        
+                        <span> 
+                            <b><span class="text-offline">@p.Usuario.Nome</span></b>
+                            <span id="spanEstrelas@(p.Codigo)"></span>, @p.Usuario.Cidade.Nome , @p.Usuario.Cidade.Estado.Sigla
+                        </span>
+                        
+                        <img src="~/content/images/down.png" style="border:none" />
+
+                        <div class="collapse">
+                            @if (p.NumBoloesParticipou > 0)
+                            {
+                                
+                                if (p.NumBoloesParticipou == 1)
+                                {
+                                    
+                                    <span>Só participou de 
+                                    <a id="aToolTip@(p.Codigo)"
+                                       class="myTooltip"
+                                       href="#"
+                                       data-toggle="tooltip"
+                                       title=""
+                                       data-original-title="@(p.NomeBoloesParticipou)">@p.NumBoloesParticipou Bolão</a> e a sua posição foi a @p.MelhorColocacaoBoloesPassados&ordf;.</span>
+                                    
+                                }
+                                else
+                                {
+                                       <span>Já participou de 
+                                       <a id="aToolTip@(p.Codigo)"
+                                       class="myTooltip"
+                                       href="#"
+                                       data-toggle="tooltip"
+                                       title=""
+                                       data-original-title="@(p.NomeBoloesParticipou)">@p.NumBoloesParticipou Bolões</a> e a melhor posição foi a @p.MelhorColocacaoBoloesPassados&ordf; no bolão da @p.NomeBolaoMelhorColocacao</span>   
+                                }
+                                    
+                                    
+
+                            @*<a href="#"><span class="glyphicon glyphicon-thumbs-up like-icon"></span></a>*@
+                            }
+                            else
+                            {
+                                <span>É a primeira vez que participa do bolão.</span>
+                            }
+                        </div>    
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+
+    <script src="~/Scripts/Participante.js"></script>
+
+</div>
+
+

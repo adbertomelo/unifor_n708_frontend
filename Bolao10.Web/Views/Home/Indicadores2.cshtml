@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "Indicadores";
+}
+
+<script src="~/Scripts/Indicadores.js"></script>
+
+<audio id="som">
+    <source src="/Content/sounds/DoorBell.mp3" />
+</audio>
+
+<div class="row">
+    @foreach (var indicador in @ViewBag.Indicadores)
+    {
+
+        <div class="col-md-3 col-xs-12">
+
+            <div id="statbox@(indicador.Cod)" class="statbox @(indicador.Cod)">
+
+                <div class="corpo">
+
+                    @if (indicador.Cod != "PosicaoAtual")
+                    {
+
+                        <div class="pull-right">
+                            @if (indicador.Cod == "PlacaresHoje")
+                            {
+                                <a id="link@(indicador.Cod)" href="#" onclick="javacript:getProximoPlacar('@(indicador.Cod)')" class="fa fa-refresh fa-lg branco" title="Próximo placar"></a>
+                            }
+                            else
+                            {
+
+                                var classRefresh = "";
+
+                                //if (indicador.Cod == "PosicaoTempoReal")
+                                //{
+                                //    classRefresh = "fa fa-refresh fa-lg fa-spin branco";
+                                //}
+                                //else
+                                //{
+                                classRefresh = "fa fa-refresh fa-lg branco";
+                                //}
+
+                                <a id="link@(indicador.Cod)"
+                                   href="#"
+                                   title="Próximo indicador"
+                                   onclick="javacript:getProximoIndicador('@(indicador.Cod)')"
+                                   class="@(classRefresh)"></a>
+                            }
+                        </div>
+
+
+                    }
+
+                    @{
+                        var @indicValTest = "";
+                     }
+
+                    @foreach (var valor in indicador.Valores)
+                    {
+                        string indicVal = valor.Val;
+                        string indicCompl = "";
+                        int posCompl = indicVal.IndexOf(":");
+
+                        if (posCompl > 0)
+                        {
+                            indicVal = valor.Val.Substring(0, posCompl);
+                            indicCompl = valor.Val.Substring(posCompl + 1);
+                        }
+
+                        <div id="val@(indicador.Cod)" class="number"><span class="number">@indicVal</span><span class="number-min">@indicCompl</span></div>
+                        
+                        indicValTest = @indicVal;
+                    }
+
+                </div>
+
+                <div id="nome@(indicador.Cod)" class="legenda">
+                    @indicador.Nome
+                    @if (@indicador.Cod == "MelhorPosicaoDia")
+                    {
+                        <a id="info" class="myTooltip" href="#" data-toggle="tooltip" style="color:white" title="" data-original-title="Indica a melhor posição que você poderá obter em um dia com jogo"><span class="glyphicon glyphicon-info-sign"></span></a>
+                    }
+                    
+                    @if (@indicador.Cod == "PlacaresHoje" && @indicValTest=="")
+                    {
+                        <a id="info" class="myTooltip" href="#" data-toggle="tooltip" style="color:white" title="" data-original-title="O próximo jogo pertence a uma rodada aberta.Não pode ser exibido."><span class="glyphicon glyphicon-info-sign"></span></a>
+                    }
+                </div>
+
+            </div>
+
+        </div>
+
+    }
+
+</div>
+
+
+<script>
+    $(".myTooltip").tooltip();
+</script>
+
+

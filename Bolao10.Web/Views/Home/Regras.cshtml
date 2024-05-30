@@ -1,0 +1,165 @@
+﻿
+@{
+    ViewBag.Title = "Regras";
+}
+
+<div class="page-header">Regras</div>
+
+<blockquote>
+    <h3 class="text-primary"><strong> O que é</strong></h3>
+    <footer>
+        Consiste em um bolão em que cada participante indica o placar de todos os jogos da copa, rodada por rodada. Em cada jogo, o participante acumulará pontos conforme tabela no item "Pontuação". Ao final, serão premiados aqueles que ficarem nas três primeiras classificações.
+    </footer>
+</blockquote>
+
+<blockquote>
+    <h3 class="text-primary"><strong>Participação</strong></h3>
+    <footer>
+        A participação se iniciará por um convite enviado por algum participante do bolão. Aceitando o convite, o participante informa seus dados pessoais e define uma senha de acesso, através da qual tem acesso imediato e pode efetuar seu pagamento. Caso não efetue seu pagamento em alguns dias, sua inscrição será automaticamente cancelada.
+    </footer>
+</blockquote>
+
+<blockquote>
+    <h3 class="text-primary"><strong>Apostas</strong></h3>
+    <footer>
+        As apostas (placares) para cada jogo serão feitas rodada por rodada do torneio, dentro do prazo liberado para lançamentos.
+        No caso da primeira fase, o participante poderá lançar os placares de toda a fase ou por rodada (3 rodadas).
+        Quando a rodada tiver seu prazo encerrado para lançamentos,  os participantes terão acesso aos placares uns dos outros. Não serão permitidos, em hipótese alguma, lançamentos fora do prazo definido. Abaixo tabela com os prazos de lançamento para cada fase/rodada:
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Fase</th>
+                    <th>Rodada</th>
+                    <th>Início</th>
+                    <th>Fim</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="3">Primeira Fase</td>
+                    <td>Primeira Rodada</td>
+                    <td>01/11/2022 00:00</td>
+                    <td>20/11/2022 12:00</td>
+                </tr>
+                <tr>
+
+                    <td>Segunda Rodada</td>
+                    <td>01/11/2022 00:00</td>
+                    <td>25/11/2022 06:00</td>
+                </tr>
+                <tr>
+
+                    <td>Terceira Rodada</td>
+                    <td>01/11/2022 00:00</td>
+                    <td>29/11/2022 11:00</td>
+                </tr>
+
+                <tr>
+                    <td rowspan="5">Segunda Fase</td>
+                    <td>Oitavas</td>
+                    <td>02/12/2022 15:00</td>
+                    <td>03/12/2022 11:00</td>
+                </tr>
+                <tr>
+                    <td>Quartas</td>
+                    <td>06/12/2022 19:00</td>
+                    <td>09/12/2022 11:00</td>
+                </tr>
+
+                <tr>
+                    <td>Semifinais</td>
+                    <td>10/12/2022 15:00</td>
+                    <td>13/12/2022 15:00</td>
+                </tr>
+                <tr>
+                    <td>Terceiro Lugar</td>
+                    <td>14/12/2022 19:00</td>
+                    <td>17/12/2022 11:00</td>
+                </tr>
+                <tr>
+                    <td>Final</td>
+                    <td>14/12/2022 19:00</td>
+                    <td>18/12/2022 11:00</td>
+                </tr>
+            </tbody>
+        </table>
+    </footer>
+</blockquote>
+
+<blockquote>
+    <h3 class="text-primary"><strong>Pontuação</strong></h3>
+    <footer>
+        O total de pontos de cada participante será a soma dos pontos obtidos em cada jogo da copa, de acordo com os critérios abaixo:
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Pontos</th>
+                    <th>Situação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>3</td>
+                    <td>Acertar o placar exato. Ex: palpitou 3X1 e o resultado foi 3X1 </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Acertar a diferença de gols. Ex: palpitou 0X2 e o resultado foi 3X5, ou 2X4, ou 8X10, etc. Fica claro que o resultado 5X3 não marca pontos, neste caso. </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Acertar o vencedor e o perdedor. Ex : palpitou 5X1 e o resultado foi 4X2, ou 1X0, ou 4X1, etc. </td>
+                </tr>
+                <tr>
+                    <td>0</td>
+                    <td>Nenhum dos anteriores</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <blockquote>
+            <strong>
+                ATENÇÃO : Não haverá acúmulo de pontos no mesmo jogo, ou seja, somente a maior pontuação das situações acima será considerada para o mesmo jogo. Somente serão considerados os gols ocorridos no tempo normal de jogo, não sendo considerados, portanto, os gols de prorrogação ou disputa por pênaltis.
+            </strong>
+        </blockquote>
+    </footer>
+</blockquote>
+
+<blockquote>
+    <h3 class="text-primary"><strong>Classificação</strong></h3>
+    <footer>
+        A classificação será feita do maior número de pontos para o menor. Caso ocorra empate no total de pontos, será utilizado como desempate, nesta ordem, o maior número de acertos de 3 pontos e o maior número de acertos de 2 pontos.
+    </footer>
+</blockquote>
+
+<blockquote>
+    <h3 class="text-primary"><strong>Prêmio</strong></h3>
+    <footer>
+        O valor total do prêmio será o número de participantes multiplicado por R$ 95,00. 70% desse valor irão para os participantes que ficarem na primeira classificação; 20% para os que ficarem na segunda classificação e os 10% restantes para os participantes que ficarem na terceira classificação. Para que não restem dúvidas, caso os três primeiros classificados estejam empatados em todos os critérios, eles são considerados empatados em primeiro lugar e dividirão, portanto, 70% do prêmio total.
+    </footer>
+</blockquote>
+
+
+<blockquote>
+    <h3 class="text-primary"><strong>Exceções</strong></h3>
+    <footer>
+        Qualquer situação não prevista neste documento será discutida com os envolvidos e encontrada a solução mais justa.
+    </footer>
+</blockquote>
+
+<blockquote>
+    <h3 class="text-primary"><strong>Considerações Finais</strong></h3>
+    <footer>
+        <ul>
+            <li>a - Embora o bolão seja pago, é uma brincadeira e não tem nenhum fim lucrativo;</li>
+            <li>b - Não será aceita, em nenhuma hipótese, qualquer consideração que venha de encontro às regras acima;</li>
+            <li>c - O valor da inscrição para cada participante será R$ @(ViewBag.Valor) (cem reais), dos quais R$ 5,00 (cinco reais) serão usados para custear as despesas com domínio, hospedagem e banco de dados. Portanto, R$ 95,00 (noventa e cinco reais) irão compor o prêmio do  bolão.</li>
+            <li>d - Caso ainda haja alguma dúvida, favor enviar e-mail para  @(ViewBag.EmailAdmin)</li>
+        </ul>
+    </footer>
+</blockquote>
+
+<blockquote>
+    <p class="pull-right">Autor: Adberto Melo</p>
+</blockquote>

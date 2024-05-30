@@ -1,0 +1,99 @@
+﻿
+
+@{
+    ViewBag.Title = "Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="page-header">Pagamento</div>
+
+<div class="visible-md visible-lg visible-sm">
+
+    <blockquote>
+        <p>
+            Para finalizar sua inscrição, você precisa efetuar o pagamento. O pagamento só poderá ser feito via PIX.<br />
+            O pix será para <mark><b>Adberto Silva de Melo.</b></mark><br />
+            Use o QrCode abaixo para efetuar o pagamento. Após a confirmação do recebimento, seu acesso será liberado.<br />
+        </p>
+    </blockquote>
+
+    <div style="text-align:center">
+        <img src="@ViewBag.QrCode" />
+    </div>
+
+    <div class="pull-right">
+        <span>Aguardando pagamento  </span><img src="@Url.Content("/Content/images/loading_small.gif")" />
+    </div>
+    
+</div>
+
+<div class="visible-xs">
+
+    <blockquote>
+        <p>
+            Para finalizar sua inscrição, você precisa efetuar o pagamento.<br />
+            O pagamento só poderá ser feito via PIX.<br />
+            O pix para pagamento é <mark><b>adbertomelo@gmail.com</b></mark> <br />
+            O valor é <mark><b>R$ @ViewBag.Bolao.Valor</b></mark> <br />
+            Após a confirmação do recebimento, seu acesso será liberado.
+
+            <input id="qrcode" type="hidden" value="@ViewBag.PixPayload" />
+
+            <input id="key" type="hidden" value="@ViewBag.Key" />
+
+        </p>
+
+        <p>
+            Use o botão abaixo para usar a função Pix Copia e Cola do seu banco.<br />
+
+            <button class="btn-primary" onclick="CopyQrCode()">
+                Pix Copia e Cola
+            </button>
+
+
+        </p>
+    </blockquote>
+
+
+
+
+</div>
+
+<script>
+
+    const key = document.getElementById("key").value;
+
+    function CopyQrCode() {
+        // Get the text field
+        var copyText = document.getElementById("qrcode");
+
+        // Copy the text inside the text field
+        navigator.clipboard.writeText(copyText.value);
+
+        alert("Copiado");
+
+    }
+
+    const intervalID = setInterval(verificarPagamento, 5000, key);
+
+    function verificarPagamento(key) {
+
+        $.ajax({
+            url: "/payment/PagamentoEfetuado",
+            data: { key: key },
+            dataType: 'json',
+            success: function (data) {
+
+                if (data == "S") {
+                    location.href = "/home/PagamentoConfirmado";
+                }
+            },
+            error: function (jqXHR, textoStatus, errorThrown) {
+                console.log('Analisar Erro!' + errorThrown);
+            }
+        });
+    }
+
+
+</script>

@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">Notificações</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <table id="tableParticipantes" class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Mensagem</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var n in ViewBag.Notificacoes)
+                {
+
+                    <tr>
+                        <td>@n.TimeStamp</td>
+                        <td>@n.Mensagem</td>
+                    </tr>
+
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+

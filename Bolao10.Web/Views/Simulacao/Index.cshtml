@@ -1,0 +1,122 @@
+﻿@{
+    ViewBag.Title = "Simulação";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">Simulação</div>
+
+<script src="~/Scripts/Simulacao.js"></script>
+
+<div class="row">
+
+    <div class="col-md-6">
+        <div class="pull-left">
+            <a id="anterior" data-bind="visible: Index() > 0" href="#">Anterior</a>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="pull-right">
+            <a id="proximo" data-bind="visible: Index() < (Dias().length - 1)" href="#">Próximo</a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <div>
+                        <table>
+                            <tbody>
+
+                                <!-- ko with: Dia -->
+                                <!-- ko foreach: Jogos-->
+                                <tr>
+                                    <td>
+                                        <input type="hidden" data-bind="value: Id" />
+                                    </td>
+                                    <td>
+                                        <div data-bind="attr: {class: Time1().Figura}" />
+                                    </td>
+                                    <td>
+                                        <div class="visible-md visible-lg nome-time" data-bind="text: Time1().Nome"></div>
+                                        <div class="visible-xs visible-sm" data-bind="text: Time1().Sigla"></div>
+                                    </td>
+                                    <td>
+                                        <input type="number" maxlength="2" min="0" onClick="this.select();"
+                                               data-bind="attr: {golsoficial: Gols1, meusgols: MeusGols1, id: IdTime1 }, 
+                                                          value: Gols1, 
+                                                          valueUpdate: 'afterkeydown', 
+                                                          event: { keyup: $root.GerarRanking }" class="text-center placar" />
+                                    </td>
+                                    <td>X</td>
+                                    <td>
+                                        <input type="number" maxlength="2" min="0" onClick="this.select();" data-bind="attr: {golsoficial: Gols2, meusgols: MeusGols2, id: IdTime2}, value: Gols2, valueUpdate: 'afterkeydown', event: { keyup: $root.GerarRanking }" class="text-center placar" />
+                                    </td>
+                                    <td>
+                                        <div data-bind="attr: {class: Time2().Figura}" />
+                                    </td>
+                                    <td>
+                                        <div class="visible-md visible-lg nome-time" data-bind="text: Time2().Nome"></div>
+                                        <div class="visible-xs visible-sm" data-bind="text: Time2().Sigla"></div>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="glyphicon glyphicon-screenshot" data-bind="attr: {title: MeuPlacar}, click: PreencherPlacar"></a>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="fa fa-eraser" data-bind="click: LimparPlacar" title="Limpar"></a>
+                                    </td>
+                                </tr>
+                                <!-- /ko -->
+                                <!-- /ko -->
+                            </tbody>
+                        </table>
+                    </div>                    
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- ko foreach: Dias -->
+<!-- ko foreach: Jogos-->
+<input type="hidden" data-bind="attr: {id: IdTime1}, value: Gols1" />
+<input type="hidden" data-bind="attr: {id: IdTime2}, value: Gols2" />
+<!-- /ko -->
+<!-- /ko -->
+
+<div class="row">
+    <div class="col-md-12">
+        <div id="divRanking"></div>
+    </div>
+</div>
+
+<script>
+    $('#anterior').click(function (evt) {
+
+        evt.preventDefault();
+
+        diaAnterior();
+    });
+
+    $('#proximo').click(function (evt) {
+
+        evt.preventDefault();
+
+        proximoDia();
+    });
+
+
+    $(function() {
+
+        $("input").click(function () {
+            $(this).select();
+        });
+
+    })
+
+</script>

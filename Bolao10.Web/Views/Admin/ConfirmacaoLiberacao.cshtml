@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Liberar Participantes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">Liberação de Participantes</div>
+
+<div class="row">
+
+    <div class="col-md-7">
+
+        <form action="liberarparticipante">
+
+            <p>
+                Confirma a liberação do <b>@ViewBag.Participante.Usuario.Nome</b>?
+            </p>
+
+            <p>
+                <button class="btn-primary" type="submit">Confirmar</button>
+            </p>
+
+            <input type="hidden" name="codigo" value="@ViewBag.Participante.Codigo" />
+            <input type="hidden" name="pix" value="@ViewBag.Pix" />
+
+
+        </form>
+
+    </div>
+</div>
+

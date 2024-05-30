@@ -1,0 +1,233 @@
+﻿<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+
+    <title>Bolão10 - @ViewBag.Title</title>
+
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    
+    <meta name="description" content="Bolão10" />
+
+    <meta name="robots" content="index" />
+
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta http-equiv="cache-control" content="no-cache" />
+
+    <meta http-equiv="pragma" content="no-cache" />
+
+    <meta http-equiv="expires" content="-1" />
+
+    <link rel=stylesheet href="/Content/bootstrap.min.css">
+
+    <link rel=stylesheet href="/Content/bootstrap-notifications.min.css">
+
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+    @Styles.Render("~/Content/css")
+
+    @Scripts.Render("~/bundles/modernizr")
+
+    @Scripts.Render("~/bundles/jquery")
+
+    
+    <script>
+        $.ajaxSetup({ cache: false });
+    </script>
+    
+
+</head>
+
+<body>
+
+    @*<script src="/Scripts/bootstrap.min.js"></script>*@
+
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @Scripts.Render("~/bundles/signalr")
+
+    @Scripts.Render("~/bundles/knockout")
+
+    @{ 
+
+        bool IsAuthenticated = false;
+
+        var token = Session["token1"];
+
+        if (token != null)
+        {
+            IsAuthenticated = true;
+        }
+
+    }
+
+    @if (IsAuthenticated)
+    {
+        <script src="~/signalr/hubs"></script>
+        <script src="~/Scripts/Bolao10-2.js"></script>
+    }
+
+    <div>
+      
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @if (IsAuthenticated)
+                    {
+                        @Html.ActionLink("BOLÃO10", "Index", "Home", null, new { @class = "navbar-brand", @style = "font-family:Segoe UI,Arial,Helvetica,sans-serif" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("BOLÃO10", "Login", "Account", null, new { @class = "navbar-brand", @style = "font-family:Segoe UI,Arial,Helvetica,sans-serif" })
+                    }
+
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    @if (IsAuthenticated)
+                    {
+                        <ul class="nav navbar-nav">
+                            <li>@Html.ActionLink("Apostas", "Index", "Aposta")</li>
+                            <li>@Html.ActionLink("Simulação", "Index", "Simulacao")</li>
+                            <li>@Html.ActionLink("Ranking", "Index", "Ranking")</li>
+                            <li>@Html.ActionLink("Participantes", "List", "Participante")</li>
+                            <li>@Html.ActionLink("Jogos", "Index", "Jogo")</li>
+                            <li class="visible-lg visible-md">@Html.ActionLink("Regras", "Regras", "Home")</li>
+                            <li class="visible-lg visible-md">@Html.ActionLink("Enquete", "Enquete", "Home")</li>
+                        </ul>
+
+                        <ul class="nav navbar-nav visible-lg visible-md">
+                            <li class="dropdown">
+                                <a href="/Participante/List" class="dropdown-toggle" title="Usuários Online">
+                                    <i class="glyphicon glyphicon-user" style="color:white"></i>
+                                    <span id="span-users" class="badge badge-online"></span>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <ul class="nav navbar-nav visible-lg visible-md">
+                            <li class="dropdown">
+                                @{Html.RenderAction("NotificacoesMenu", "Account");}
+                            </li>
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+
+                            @{Html.RenderAction("UsuarioMenu", "Account");}
+
+
+                        </ul>
+
+                    }
+
+                </div>
+
+            </div>
+        </nav>
+
+        <div id="body" class="container body-content">
+
+            <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Modal title</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
+            @if (TempData["Mensagem"] != null)
+            {
+                <div class="alert alert-info">
+                    <a class="close" data-dismiss="alert">×</a>
+                    <p>
+                        @TempData["Mensagem"]
+                    </p>
+                </div>
+            }
+
+            @if (TempData["Erro"] != null)
+            {
+
+                <div class="alert alert-danger">
+                    <a class="close" data-dismiss="alert">×</a>
+                    <p>
+                        @TempData["Erro"]
+                    </p>
+                </div>
+            }
+
+            @RenderBody()
+        </div>
+
+    </div>
+
+
+    @RenderSection("scripts", required: false)
+
+
+    <script>
+
+        
+        var elem = $("#li-notificacoes");
+
+       $("#li-notificacoes").click(
+
+            function () {
+
+
+                if ($(this).hasClass("open"))
+                {
+                    return;
+                }
+
+                var totalNotif = $("#total-notificacoes").attr("data-count");
+
+                if (totalNotif == "0")
+                    return;
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/MarcarNotificacoesComoLidas",
+                    success: function (data) {
+                        //$("#total-notificacoes").attr("data-count", "0");
+                    },
+                    error: function (jqXHR, textoStatus, errorThrown) {
+                        //alert("erro");
+                    },
+                    complete: function (jqXHR, textoStatus, errorThrown) {
+                        //alert("complete");
+                    }
+                });
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

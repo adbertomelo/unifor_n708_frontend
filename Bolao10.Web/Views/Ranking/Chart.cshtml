@@ -1,0 +1,55 @@
+﻿
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<script type="text/javascript">
+
+
+    google.load("visualization", "1", { packages: ["corechart"] });
+
+    google.setOnLoadCallback(function () {
+        document.getElementById("teste").style.display = "block";
+    });
+
+
+    function drawChart() {
+
+        $.ajax({
+            url: "/ranking/getDataChart",
+            dataType: 'json',
+            success: function (data) {
+
+
+                var tdata = new google.visualization.DataTable();
+
+                tdata.addColumn('string', 'Jogo');
+                tdata.addColumn('number', 'Participante1');
+                tdata.addColumn('number', 'Participante2');
+
+                for (var i = 0; i < data.length; i++) {
+                    tdata.addRow([data[i][1], data[i][2], data[i][3]]);
+                }
+
+                var options = {
+                    title: "Evolução",
+                    vAxis: { minValue: 1 }
+                };
+
+                var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+                chart.draw(tdata, options);
+
+
+            },
+            error: function (jqXHR, textoStatus, errorThrown) {
+                alert('analisar erro');
+            }
+        });
+
+
+    }
+
+</script>
+
+<a id="teste" href="#" style="display:none" onclick="javascript: drawChart();">Teste</a>
+
+<div id="chart_div" style="width: 900px; height: 500px;"></div>

@@ -1,0 +1,240 @@
+﻿@{
+    ViewBag.Title = "Convites";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var total = ViewBag.Convites.Count;
+    var label = @total == 0 || @total > 1 ? "Convites" : "Convite";
+}
+
+<script src="~/Scripts/footable.js"></script>
+<link href="~/Content/footable.core.css" rel="stylesheet" />
+
+<div id="results">
+
+</div>
+
+<div class="row">
+
+    <div class="col-md-12">
+
+       <div class="page-header">@total @label</div>
+
+    </div>
+
+</div>
+
+@if(!@ViewBag.PrazoEncerrado)
+{
+<div class="row">
+
+    <div class="col-md-2">
+        @Html.ActionLink("Convide um amigo", "New")
+    </div>
+    <div class="col-md-3">
+        
+    </div>
+    <div class="col-md-7"></div>
+</div>
+    
+}
+
+<div class="row">
+
+
+    <div class="col-md-12">
+        
+        <table id="tableConvites" class="table table-condensed">
+
+            <thead>
+                <tr>
+                    <th data-toggle="true">
+                        Nome
+                    </th>
+                    <th data-hide="phone">
+                        E-mail
+                    </th>
+                    <th data-hide="phone" style="display: table-cell;">
+                        Data
+                    </th>
+                    <th>
+                        Sit. do Convite
+                    </th>
+                    <th data-hide="phone">
+                        Sit. no Bolão
+                    </th>
+                    <th data-hide="phone">
+                        Sit. do Pgto.
+                    </th>
+                    <th style="display:table-cell;">
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var c in ViewBag.Convites)
+                {
+
+                    var situacaoConvite = @c.SituacaoConvite;
+                    var situacaoBolao = @c.SituacaoBolao;
+                    var situacaoPagamento = @c.SituacaoPagamento;
+
+                    if (situacaoPagamento == "Não iniciado")                     
+                        situacaoPagamento = "NaoIniciado";
+                    
+                    if(situacaoPagamento == "Não identificado")
+                        situacaoPagamento = "NaoIdentificado";
+
+                    <tr id="tr@(c.Id)">
+                        <td>
+                            @c.NomeConvidado
+                        </td>
+                        <td>
+                            @c.EmailConvidado
+                        </td>
+                        <td>
+                            @c.DataConvite.ToString("d")
+                        </td>
+                        <td>
+                            <span class="label Status @(situacaoConvite)">
+                                
+                                @c.SituacaoConvite
+                                
+                                @if(@c.SituacaoConvite == "Pendente")
+                                {
+                                    if (@c.NumDias > 1)
+                                    {
+                                        <span>(@(c.NumDias)dd)</span>
+                                    }
+                                    else
+                                    {
+                                        <span>(@(c.NumDias)d)</span>
+                                    }
+                                   
+                                }
+                                
+                            </span>
+                        </td>
+                        <td>
+                            <span class="label Status @(situacaoBolao)">@c.SituacaoBolao</span>
+                        </td>
+                        <td>
+                            <span class="label Status @(situacaoPagamento)">@c.SituacaoPagamento</span>
+                        </td>
+                        <td style="display:table-cell;">
+                            @if (@c.SituacaoConvite != "Aceito" && @c.SituacaoConvite != "Cancelado" && !@ViewBag.PrazoEncerrado)
+                            {
+                                <a href="javascript:void(0);" title="Reenviar" id="send@(c.Id)" class="glyphicon glyphicon-send"></a>
+                                <a href="javascript:void(0);" title="Excluir" id="excl@(c.Id)" class="glyphicon glyphicon-trash"></a>
+                                <img id="img@(c.Id)" src="@Url.Content("/Content/images/loading_small.gif")" style="display:none;" />
+                            }
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(function(){
+        $('#tableConvites').footable();
+    });
+
+    $(".glyphicon.glyphicon-send").click(
+
+        function () {
+
+            var id =  $(this).attr("id").substr(4);
+
+            $(this).hide();
+
+            var imgId = "#img" + id;
+
+            $(imgId).show();
+
+            $("#excl" + id).hide();
+
+            $.ajax({
+                type:"GET",
+                url: "/Convite/ReenviarConvite",
+                data: "key=" + id,
+                dataType: 'html',
+                success: function (data) {
+
+                    $("#results").html(data);
+
+
+                },
+                error: function (jqXHR, textoStatus, errorThrown) {
+
+                    $("#results").html(errorThrown);
+
+
+                },
+                complete: function (jqXHR, textoStatus, errorThrown)
+                {
+                    $(imgId).hide();
+
+                    $("#send" + id).show();
+
+                    $("#excl" + id).show();
+
+                }
+            });
+
+        }
+    );
+
+
+    $(".glyphicon.glyphicon-trash").click(
+
+        function () {
+
+            if (!confirm("Confirma a exclusão do convite?"))
+                return;
+
+            var id = $(this).attr("id").substr(4);
+
+            $(this).hide();
+
+            $("#send"+id).hide();
+
+            var imgId = "#img" + id;
+
+            $(imgId).show();
+
+            $.ajax({
+                type: "POST",
+                url: "/Convite/Excluir",
+                data: "key=" + id,
+                dataType: 'text',
+                contentType: 'application/x-www-form-urlencoded',
+                success: function (data) {
+
+                    var tr = $("#tr" + id);
+
+                    tr.fadeOut(400, function () {
+                        tr.remove();
+                    });
+
+                },
+                error: function (jqXHR, textoStatus, errorThrown) {
+
+                    $("#results").html(errorThrown);
+
+                    $(imgId).hide();
+
+                    $("#excl" + id).show();
+
+                    $("#send" + id).show();
+
+
+                }
+            });
+
+        }
+    );
+</script>
