@@ -68,7 +68,6 @@ namespace Bolao10.Services
                 try
                 {
 
-                    /*https://www.stevejgordon.co.uk/sending-and-receiving-json-using-httpclient-with-system-net-http-json*/
                     var res = client.PostAsync(url,
                       new StringContent(JsonConvert.SerializeObject(new { Login = userName, Senha = password }),
                         Encoding.UTF8, "application/json")
@@ -79,9 +78,6 @@ namespace Bolao10.Services
                         
                         return res.Result.Content.ReadFromJsonAsync<UsuarioResponse>().Result;
                         
-                        /*https://kevsoft.net/2021/12/19/traversing-json-with-jsondocument.html*/
-                        //var token = json.RootElement.GetProperty("token").GetString();
-
                     }                        
                     else
                         throw new Exception("Login inválido!");
